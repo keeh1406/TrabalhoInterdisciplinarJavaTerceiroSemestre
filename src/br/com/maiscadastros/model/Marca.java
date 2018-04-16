@@ -1,10 +1,16 @@
 package br.com.maiscadastros.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
 public class Marca {
 	// Atributos
-	private int id;
-    private String nome;
+	
+	@Id
+	@Column private int id;
+	@Column private String nome;
     
  // Construtores
     public Marca()

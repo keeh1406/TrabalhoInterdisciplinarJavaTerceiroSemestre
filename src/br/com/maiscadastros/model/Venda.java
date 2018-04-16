@@ -1,19 +1,24 @@
 package br.com.maiscadastros.model;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@Entity
 public class Venda
 {
  // Atributos
-    private int         id;
-    private String      descricao;
-    private int         quantidadeProduto;
-    private BigDecimal  valor;
-    private LocalDate   data;
-    private long        notaFiscal;
-    private int         idProduto;
-    private int         idCliente;
+	@Id
+	@Column private int         id;
+	@Column private String      descricao;
+	@Column private int         quantidadeProduto;
+	@Column private BigDecimal  valor;
+	@Column private LocalDate   data;
+	@Column private long        notaFiscal;
+	@Column private int         idProduto;
+	@Column private int         idCliente;
 
  // Construtores
     public Venda()

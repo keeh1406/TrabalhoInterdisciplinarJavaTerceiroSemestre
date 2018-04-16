@@ -2,17 +2,32 @@ package br.com.maiscadastros.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
 import br.com.maiscadastros.model.Usuario;
 
+@Entity
 public class Funcionario extends Usuario
 {
     // Atributos
-    private LocalDate dataNascimento;
-    private long      telefone;
-    private long      cpf;
-    private String    endereco;
-    private boolean   flGerente;
-    private int       idLoja;
+	@Column (name = "DataNascimento_Funcionario")
+	private LocalDate dataNascimento;
+	
+	@Column (name = "Telefone_Funcionario")
+	private long      telefone;
+	
+	@Column (name = "CPF_Funcionario")
+	private long      cpf;
+	
+	@Column (name = "Endereco_Funcionario")
+	private String    endereco;
+	
+	@Column (name = "FL_GERENTE")
+	private boolean   flGerente;
+	
+	@Column (name = "")
+	private int       idLoja;
 
     // Construtores
     public Funcionario()

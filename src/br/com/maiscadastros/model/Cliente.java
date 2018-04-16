@@ -1,15 +1,20 @@
 package br.com.maiscadastros.model;
 
 import java.time.LocalDate;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
 import br.com.maiscadastros.model.Usuario;
 
+@Entity
 public class Cliente extends Usuario
 {
     // Atributos
-    private LocalDate dataNascimento;
-    private long      telefone;
-    private long      cpf;
-    private String    endereco;
+	@Column private LocalDate dataNascimento;
+	@Column private long      telefone;
+	@Column private long      cpf;
+	@Column private String    endereco;
 
     // Construtores
     public Cliente()

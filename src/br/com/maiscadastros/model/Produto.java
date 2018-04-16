@@ -2,16 +2,22 @@ package br.com.maiscadastros.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Produto
 {
     // Atributos
-    private int         id;
-    private String      nome;
-    private String      descricao;
-    private LocalDate   dataValidade;
-    private int         idLoja;
-    private int         idSetor;
-    private int         idMarca;
+	@Id
+	@Column private int         id;
+	@Column private String      nome;
+	@Column private String      descricao;
+	@Column private LocalDate   dataValidade;
+	@Column private int         idLoja;
+	@Column private int         idSetor;
+	@Column private int         idMarca;
 
  // Construtores
     public Produto()

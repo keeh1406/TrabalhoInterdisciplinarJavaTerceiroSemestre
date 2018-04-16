@@ -1,12 +1,19 @@
 package br.com.maiscadastros.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public abstract class Usuario
 {
     // Atributos
-    private int    id;
-    private String email;
-    private String senha;
-    private String nome;
+	
+	@Id
+	@Column private int    id;
+	@Column private String email;
+	@Column private String senha;
+	@Column private String nome;
 
     // Construtores
     public Usuario()
