@@ -3,14 +3,19 @@ package br.com.maiscadastros.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "TABELA_MARCA")
 public class Marca {
 	// Atributos
 	
 	@Id
-	@Column private int id;
-	@Column private String nome;
+	@Column (name = "Codigo_Marca")
+	private int id;
+	
+	@Column (name = "Nome_Marca")
+	private String nome;
     
  // Construtores
     public Marca()

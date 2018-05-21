@@ -5,7 +5,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-
 import br.com.maiscadastros.controller.MarcaController;
 import br.com.maiscadastros.dto.MarcaDto;
 import br.com.maiscadastros.model.Marca;
@@ -142,13 +141,13 @@ public class MarcaJavaBean {
 	        return null;
 	    }
 
-	    public String consultar()
+	   public String consultar(Marca marca)
 	    {
-	        System.out.println("MarcaVB - Consultar : " + this);
+	        System.out.println("LojaVB - Consultar : " + this);
 
 	        MarcaController tController = new MarcaController();
 
-	        MarcaDto tDto = tController.recuperarMarca(id);
+	        MarcaDto tDto = tController.recuperarMarca(marca);
 	        if (tDto.isOk())
 	        {
 	            // Ok, recuperado
@@ -158,7 +157,7 @@ public class MarcaJavaBean {
 
 	            // indicando que a pesquisa deu certo
 	            edicao = true;
-	            FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("MARCA", tMarca);
+	            FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("LOJA", tMarca);
 	        }
 	        else
 	        {
@@ -173,13 +172,13 @@ public class MarcaJavaBean {
 	        return tela;
 	    }
 
-	    public String excluir()
+	    public String excluir(Marca marca)
 	    {
 	        System.out.println("MarcaVB - Excluir : " + this);
 
 	        MarcaController tController = new MarcaController();
 
-	        MarcaDto tDto = tController.removeMarca(id);
+	        MarcaDto tDto = tController.removeMarca(marca);
 	        if (tDto.isOk())
 	        {
 	            // Ok, exluido

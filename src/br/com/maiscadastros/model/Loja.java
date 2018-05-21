@@ -3,19 +3,36 @@ package br.com.maiscadastros.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "TABELA_LOJA")
 public class Loja
 {
     // Atributos
 	
 	@Id
-	@Column private int        id;
-	@Column private String     nome;
-	@Column private long       telefone;
-	@Column private String     email;
-	@Column private long       cnpj;
-	@Column private String     endereco;
+	@Column (name = "Codigo_Loja")
+	private int        id;
+	
+	@Column (name = "Nome_Loja")
+	private String     nome;
+	
+	@Column (name = "Telefone_Loja")
+	private long       telefone;
+	
+	@Column (name = "Email_loja")
+	private String     email;
+	
+	@Column (name = "CNPJ_Loja")
+	private long       cnpj;
+	
+	@ManyToOne
+	@JoinColumn (name = "Endereco_Loja")
+	private String     endereco;
+	
 
     // Construtores
     public Loja()

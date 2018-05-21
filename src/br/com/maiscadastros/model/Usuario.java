@@ -3,17 +3,26 @@ package br.com.maiscadastros.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "TABELA_USUARIO")
 public abstract class Usuario
 {
     // Atributos
 	
 	@Id
-	@Column private int    id;
-	@Column private String email;
-	@Column private String senha;
-	@Column private String nome;
+	@Column (name = "Codigo_Usuario")
+	private int    id;
+	
+	@Column (name = "Email_Usuario")
+	private String email;
+	
+	@Column (name = "Senha_Usuario")
+	private String senha;
+	
+	@Column (name = "Nome_Usuario")
+	private String nome;
 
     // Construtores
     public Usuario()

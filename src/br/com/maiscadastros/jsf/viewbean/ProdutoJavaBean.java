@@ -33,9 +33,9 @@ public class ProdutoJavaBean
 	private String nomeMarca;
 	private String descricao;
 	private Date dataValidade;
-	private Integer idLoja;
-	private Integer idMarca;
-	private Integer idSetor;
+	private Loja loja;
+	private Marca marca;
+	private Setor setor;
     private boolean edicao;
     private String  tela;
     private List<Produto> listaProduto;
@@ -105,28 +105,28 @@ public class ProdutoJavaBean
 		this.dataValidade = dataValidade;
 	}
 
-	public Integer getIdLoja() {
-		return idLoja;
+	public Loja getLoja() {
+		return loja;
 	}
 
-	public void setIdLoja(Integer idLoja) {
-		this.idLoja = idLoja;
+	public void setLoja(Loja loja) {
+		this.loja = loja;
 	}
 	
-	public Integer getIdMarcca() {
-		return idMarca;
+	public Marca getMarca() {
+		return marca;
 	}
 
-	public void setIdMarca(Integer idMarca) {
-		this.idMarca = idMarca;
+	public void setMarca(Marca marca) {
+		this.marca = marca;
 	}
 	
-	public Integer getIdSetor() {
-		return idSetor;
+	public Setor getSetor() {
+		return setor;
 	}
 
-	public void setIdSetor(Integer idSetor) {
-		this.idSetor = idSetor;
+	public void setSetor(Setor setor) {
+		this.setor = setor;
 	}
 
 	public boolean isEdicao() {
@@ -193,13 +193,13 @@ if (tProduto2 != null)
         if (tProduto != null)
         {
             id = tProduto.getId();
-            idLoja = tProduto.getIdLoja();
-            idMarca = tProduto.getIdMarca();
-            idSetor = tProduto.getIdSetor();
+            loja = tProduto.getLoja();
+            marca = tProduto.getMarca();
+            setor = tProduto.getSetor();
 
             LojaController tLojaController = new LojaController();
 
-            LojaDto tLojaDto = tLojaController.recuperarLoja(idLoja);
+            LojaDto tLojaDto = tLojaController.recuperarLoja(loja);
             if (tLojaDto.isOk())
             {
                 Loja tLoja = tLojaDto.getLoja();
@@ -212,7 +212,7 @@ if (tProduto2 != null)
             
             MarcaController tMarcaController = new MarcaController();
 
-            MarcaDto tMarcaDto = tMarcaController.recuperarMarca(idMarca);
+            MarcaDto tMarcaDto = tMarcaController.recuperarMarca(marca);
             if (tMarcaDto.isOk())
             {
                 Marca tMarca = tMarcaDto.getMarca();
@@ -225,7 +225,7 @@ if (tProduto2 != null)
             
             SetorController tSetorController = new SetorController();
 
-            SetorDto tSetorDto = tSetorController.recuperarSetor(idSetor);
+            SetorDto tSetorDto = tSetorController.recuperarSetor(setor);
             if (tSetorDto.isOk())
             {
                 Setor tSetor = tSetorDto.getSetor();
@@ -294,9 +294,9 @@ if (tProduto2 != null)
         nome = null;
         descricao = null;
         dataValidade = null;
-        idLoja = null;
-        idSetor = null;
-        idMarca = null;
+        loja = null;
+        setor = null;
+        marca = null;
         edicao = false;
 
         return tela;
@@ -312,9 +312,9 @@ if (tProduto2 != null)
 	    tProduto.setDescricao(descricao);
 	    LocalDate tDataValidade = new java.sql.Date(dataValidade.getTime()).toLocalDate();
 	    tProduto.setDataValidade(tDataValidade);
-	    tProduto.setIdLoja(idLoja);
-	    tProduto.setIdSetor(idSetor);
-	    tProduto.setIdMarca(idMarca);
+	    tProduto.setLoja(loja);
+	    tProduto.setSetor(setor);
+	    tProduto.setMarca(marca);
 
 	    ProdutoController tController = new ProdutoController();
 
@@ -349,9 +349,9 @@ if (tProduto2 != null)
 	        tProduto.setDescricao(descricao);
 	        LocalDate tDataValidade = new java.sql.Date(dataValidade.getTime()).toLocalDate();
 	        tProduto.setDataValidade(tDataValidade);
-	        tProduto.setIdLoja(idLoja);
-	        tProduto.setIdSetor(idSetor);
-	        tProduto.setIdMarca(idMarca);
+	        tProduto.setLoja(loja);
+	        tProduto.setSetor(setor);
+	        tProduto.setMarca(marca);
 
 	        ProdutoController tController = new ProdutoController();
 
@@ -376,13 +376,13 @@ if (tProduto2 != null)
 	        return null;
 	    }
 
-	    public String consultar()
+	    public String consultar(Produto produto)
 	    {
 	        System.out.println("ProdutoVB - Consultar : " + this);
 
 	        ProdutoController tController = new ProdutoController();
 
-	        ProdutoDto tDto = tController.recuperarProduto(id);
+	        ProdutoDto tDto = tController.recuperarProduto(produto);
 	        if (tDto.isOk())
 	        {
 	            // Ok, recuperado
@@ -391,9 +391,9 @@ if (tProduto2 != null)
 	            nome = tProduto.getNome();
 	            descricao = tProduto.getDescricao();
 	            dataValidade = java.sql.Date.valueOf(tProduto.getDataValidade());
-	            idLoja = tProduto.getIdLoja();
-	            idMarca = tProduto.getIdMarca();
-	            idSetor = tProduto.getIdSetor();
+	            loja = tProduto.getLoja();
+	            marca = tProduto.getMarca();
+	            setor = tProduto.getSetor();
 
 	            // indicando que a pesquisa deu certo
 	            edicao = true;
@@ -412,13 +412,13 @@ if (tProduto2 != null)
 	        return tela;
 	    }
 
-	    public String excluir()
+	    public String excluir(Produto produto)
 	    {
 	        System.out.println("ProdutoVB - Excluir : " + this);
 
 	        ProdutoController tController = new ProdutoController();
 
-	        ProdutoDto tDto = tController.removeProduto(id);
+	        ProdutoDto tDto = tController.removeProduto(produto);
 	        if (tDto.isOk())
 	        {
 	            // Ok, exluido
@@ -483,11 +483,11 @@ if (tProduto2 != null)
 	    tBuilder.append(", ");
 	    tBuilder.append(dataValidade);
 	    tBuilder.append(", ");
-	    tBuilder.append(idLoja);
+	    tBuilder.append(loja);
 	    tBuilder.append(", ");
-	    tBuilder.append(idSetor);
+	    tBuilder.append(setor);
 	    tBuilder.append(", ");
-	    tBuilder.append(idMarca);
+	    tBuilder.append(marca);
 	    tBuilder.append("]");
 	    return tBuilder.toString();
 	}

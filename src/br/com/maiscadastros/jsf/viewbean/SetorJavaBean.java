@@ -142,13 +142,13 @@ public class SetorJavaBean {
 		        return null;
 		    }
 
-		    public String consultar()
+		    public String consultar(Setor setor)
 		    {
 		        System.out.println("SetorVB - Consultar : " + this);
 
 		        SetorController tController = new SetorController();
 
-		        SetorDto tDto = tController.recuperarSetor(id);
+		        SetorDto tDto = tController.recuperarSetor(setor);
 		        if (tDto.isOk())
 		        {
 		            // Ok, recuperado
@@ -173,13 +173,13 @@ public class SetorJavaBean {
 		        return tela;
 		    }
 
-		    public String excluir()
+		    public String excluir(Setor setor)
 		    {
 		        System.out.println("SetorVB - Excluir : " + this);
 
 		        SetorController tController = new SetorController();
 
-		        SetorDto tDto = tController.removeSetor(id);
+		        SetorDto tDto = tController.removeSetor(setor);
 		        if (tDto.isOk())
 		        {
 		            // Ok, exluido

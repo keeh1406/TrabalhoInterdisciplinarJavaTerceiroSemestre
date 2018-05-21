@@ -37,10 +37,10 @@ public class LojaController
         return new LojaDto(true, "Loja incluída com sucesso", tLoja);
     }
 
-    public LojaDto recuperarLoja(int pId)
+    public LojaDto recuperarLoja(Loja loja)
     {
         // Verificar as informações
-        if (pId <=0)
+        if (loja.getId() <=0)
         {
             return new LojaDto(false, "Identificador do Loja inválido");
         }
@@ -49,7 +49,7 @@ public class LojaController
         LojaDao tDao = new LojaDao();
 
         // Recuperando o Loja
-        Loja tLoja = tDao.recovery(pId);
+        Loja tLoja = tDao.recovery(loja);
         if (tLoja == null)
         {
             return new LojaDto(false, "Não existe Loja com o identificador informado");
@@ -59,10 +59,10 @@ public class LojaController
         return new LojaDto(true, "Loja recuperado com sucesso", tLoja);
     }
 
-    public LojaDto atualizarLoja(Loja pLoja)
+    public LojaDto atualizarLoja(Loja loja)
     {
         // Verificar as informações
-        if (pLoja == null)
+        if (loja == null)
         {
             return new LojaDto(false, "Tentativa de atualização de Loja nulo");
         }
@@ -70,17 +70,17 @@ public class LojaController
         // Criando o objeto de persistência
         LojaDao tDao = new LojaDao();
 
-        // Recuperando o Loja
-        Loja tLoja = tDao.recovery(pLoja.getId());
+        // Recuperando a Loja
+        Loja tLoja = tDao.recovery(loja);
         if (tLoja == null)
         {
             return new LojaDto(false, "Não existe Loja com o identificador informado");
         }
 
-        if (pLoja.getCnpj() != tLoja.getCnpj())
+        if (loja.getCnpj() != tLoja.getCnpj())
         {
             // Verificando se existe um Loja com o novo CPF
-            tLoja = tDao.recoveryByCnpj(pLoja.getCnpj());
+            tLoja = tDao.recoveryByCnpj(loja.getCnpj());
             if (tLoja != null)
             {
                 return new LojaDto(false, "Já existe Loja com o cpf informado");
@@ -88,7 +88,7 @@ public class LojaController
         }
 
         // Atualizando o Loja
-        tLoja = tDao.update(pLoja);
+        tLoja = tDao.update(loja);
         if (tLoja == null)
         {
             return new LojaDto(false, "Não existe Loja com o identificador informado");
@@ -98,27 +98,20 @@ public class LojaController
         return new LojaDto(true, "Loja alterado com sucesso", tLoja);
     }
 
-    public LojaDto removeLoja(int pId)
+    public LojaDto removeLoja(Loja loja)
     {
         // Verificar as informações
-        if (pId <=0)
+        if (loja.getId() <=0)
         {
-            return new LojaDto(false, "Identificador do Loja inválido");
+            return new LojaDto(false, "Identificador da Loja inválido");
         }
 
-        // Criando o objeto de persistência
         LojaDao tDao = new LojaDao();
 
-        // Incluindo o Loja
-        if (tDao.delete(pId))
-        {
-            // Retornando o indicativo de sucesso
-            return new LojaDto(true, "Loja removido com sucesso");
-        }
-
-        // Retornando o indicativo de erro
-        return new LojaDto(false, "Erro no processo de remoção");
+        tDao.delete(loja);
+        return new LojaDto(true, "Loja removida com sucesso");
     }
+    
     public LojaDto pesquisarLojasPorNome(String pNome)
     {
         // Criando a lista de retorno

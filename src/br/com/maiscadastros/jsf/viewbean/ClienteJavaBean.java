@@ -228,13 +228,13 @@ public String alterar()
     return null;
 }
 
-public String consultar()
+public String consultar(Cliente cliente)
 {
     System.out.println("ClienteVB - Consultar : " + this);
 
     ClienteController tController = new ClienteController();
 
-    ClienteDto tDto = tController.recuperarCliente(id);
+    ClienteDto tDto = tController.recuperarCliente(cliente);
     if (tDto.isOk())
     {
         // Ok, recuperado
@@ -265,13 +265,13 @@ public String consultar()
     return tela;
 }
 
-public String excluir()
+public String excluir(Cliente cliente)
 {
     System.out.println("ClienteVB - Excluir : " + this);
 
     ClienteController tController = new ClienteController();
 
-    ClienteDto tDto = tController.removeCliente(id);
+    ClienteDto tDto = tController.removeCliente(cliente);
     if (tDto.isOk())
     {
         // Ok, exluido

@@ -2,7 +2,6 @@ package br.com.maiscadastros.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import br.com.maiscadastros.dao.MarcaDao;
 import br.com.maiscadastros.dto.MarcaDto;
 import br.com.maiscadastros.model.Marca;
@@ -37,10 +36,10 @@ public class MarcaController {
 	        return new MarcaDto(true, "Marca incluído com sucesso", tMarca);
 	    }
 
-	    public MarcaDto recuperarMarca(int pId)
+	    public MarcaDto recuperarMarca(Marca marca)
 	    {
 	        // Verificar as informações
-	        if (pId <=0)
+	        if (marca.getId() <=0)
 	        {
 	            return new MarcaDto(false, "Identificador do Marca inválido");
 	        }
@@ -49,7 +48,7 @@ public class MarcaController {
 	        MarcaDao tDao = new MarcaDao();
 
 	        // Recuperando o Marca
-	        Marca tMarca = tDao.recovery(pId);
+	        Marca tMarca = tDao.recovery(marca);
 	        if (tMarca == null)
 	        {
 	            return new MarcaDto(false, "Não existe Marca com o identificador informado");
@@ -88,27 +87,20 @@ public class MarcaController {
 	        return new MarcaDto(true, "Marca alterado com sucesso", tMarca);
 	    }
 
-	    public MarcaDto removeMarca(int pId)
-	    {
-	        // Verificar as informações
-	        if (pId <=0)
+
+	        public MarcaDto removeMarca(Marca marca)
 	        {
-	            return new MarcaDto(false, "Identificador do Marca inválido");
+	            // Verificar as informações
+	            if (marca.getId() <=0)
+	            {
+	                return new MarcaDto(false, "Identificador da Marca inválido");
+	            }
+
+	            MarcaDao tDao = new MarcaDao();
+
+	            tDao.delete(marca);
+	            return new MarcaDto(true, "Marca removida com sucesso");
 	        }
-
-	        // Criando o objeto de persistência
-	        MarcaDao tDao = new MarcaDao();
-
-	        // Incluindo o Marca
-	        if (tDao.delete(pId))
-	        {
-	            // Retornando o indicativo de sucesso
-	            return new MarcaDto(true, "Marca removido com sucesso");
-	        }
-
-	        // Retornando o indicativo de erro
-	        return new MarcaDto(false, "Erro no processo de remoção");
-	    }
 	    
 	    public MarcaDto pesquisarMarcasPorNome(String pNome)
 	    {

@@ -5,19 +5,39 @@ import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "TABELA_PRODUTO")
 public class Produto
 {
     // Atributos
 	@Id
-	@Column private int         id;
-	@Column private String      nome;
-	@Column private String      descricao;
-	@Column private LocalDate   dataValidade;
-	@Column private int         idLoja;
-	@Column private int         idSetor;
-	@Column private int         idMarca;
+	@Column (name = "Codigo_Produto")
+	private int         id;
+	
+	@Column (name = "Nome_Produto")
+	private String      nome;
+	
+	@Column (name = "Descricao_Produto")
+	private String      descricao;
+	
+	@Column (name = "DataValidade_Produto")
+	private LocalDate   dataValidade;
+	
+	@ManyToOne
+	@JoinColumn (name = "ID_Loja")
+	private Loja loja;
+	
+	@ManyToOne
+	@JoinColumn (name = "ID_Setor")
+	private Setor setor;
+	
+	@ManyToOne
+	@JoinColumn (name = "ID_Marca")
+	private Marca marca;
 
  // Construtores
     public Produto()
@@ -25,16 +45,16 @@ public class Produto
         super();
     }
 
-    public Produto(int pId, String pNome, String pDescricao, LocalDate pDataValidade, int pIdLoja, int pIdSetor, int pIdMarca)
+    public Produto(int pId, String pNome, String pDescricao, LocalDate pDataValidade, Loja loja, Setor setor, Marca marca)
     {
         super();
         setId(pId);
         setNome(pNome);
         setDescricao(pDescricao);
         setDataValidade(pDataValidade);
-        setIdLoja(pIdLoja);
-        setIdSetor(pIdSetor);
-        setIdMarca(pIdMarca);
+        setLoja(loja);
+        setSetor(setor);
+        setMarca(marca);
     }
 
     // Métodos de acesso
@@ -78,34 +98,32 @@ public class Produto
         dataValidade = pDataValidade;
     }
 
-    public int getIdLoja()
+    public Loja getLoja() {
+		return loja;
+	}
+
+	public void setLoja(Loja loja) {
+		this.loja = loja;
+	}
+    
+    public Setor getSetor()
     {
-        return idLoja;
+        return setor;
     }
 
-    public void setIdLoja(int pIdLoja)
+    public void setSetor(Setor setor)
     {
-        idLoja = pIdLoja;
+        this.setor = setor;
     }
     
-    public int getIdSetor()
+    public Marca getMarca()
     {
-        return idSetor;
+        return marca;
     }
 
-    public void setIdSetor(int pIdSetor)
+    public void setMarca(Marca marca)
     {
-        idSetor = pIdSetor;
-    }
-    
-    public int getIdMarca()
-    {
-        return idMarca;
-    }
-
-    public void setIdMarca(int pIdMarca)
-    {
-    	idMarca = pIdMarca;
+    	this.marca = marca;
     }
 
     // Métodos gerais
@@ -122,11 +140,11 @@ public class Produto
         tBuilder.append(", ");
         tBuilder.append(getDataValidade());
         tBuilder.append(", ");
-        tBuilder.append(getIdLoja());
+        tBuilder.append(getLoja());
         tBuilder.append(", ");
-        tBuilder.append(getIdSetor());
+        tBuilder.append(getSetor());
         tBuilder.append(", ");
-        tBuilder.append(getIdMarca());
+        tBuilder.append(getMarca());
         tBuilder.append("]");
         return tBuilder.toString();
     }

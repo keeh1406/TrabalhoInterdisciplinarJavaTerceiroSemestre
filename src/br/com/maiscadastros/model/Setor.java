@@ -3,13 +3,18 @@ package br.com.maiscadastros.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "TABELA_SETOR")
 public class Setor {
 	// Atributos
 	@Id
-	@Column private int id;
-	@Column private String nome;
+	@Column (name = "Codigo_Setor")
+	private int id;
+	
+	@Column (name = "Nome_Setor")
+	private String nome;
 	    
 	 // Construtores
 	    public Setor()

@@ -2,23 +2,45 @@ package br.com.maiscadastros.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "TABELA_VENDA")
 public class Venda
 {
  // Atributos
 	@Id
-	@Column private int         id;
-	@Column private String      descricao;
-	@Column private int         quantidadeProduto;
-	@Column private BigDecimal  valor;
-	@Column private LocalDate   data;
-	@Column private long        notaFiscal;
-	@Column private int         idProduto;
-	@Column private int         idCliente;
+	@Column (name = "Codigo_Venda")
+	private int         id;
+	
+	@Column (name = "Descricao_Venda")
+	private String      descricao;
+	
+	@Column (name = "QuantidadeProduto_Venda")
+	private int         quantidadeProduto;
+	
+	@Column (name = "Valor_Venda")
+	private BigDecimal  valor;
+	
+	@Column (name = "Data_Venda")
+	private LocalDate   data;
+	
+	@Column (name = "NotaFiscal_Venda")
+	private long        notaFiscal;
+	
+	@ManyToOne
+	@JoinColumn (name = "ID_Produto")
+	private Produto produto;
+	
+	@ManyToOne
+	@JoinColumn (name = "ID_Cliente")
+	private Cliente cliente;
+	
 
  // Construtores
     public Venda()
@@ -26,7 +48,7 @@ public class Venda
         super();
     }
 
-    public Venda(int pId, String pDescricao, int pQuantidadeProduto, BigDecimal pValor, LocalDate pData, long pNotaFiscal, int pIdProduto, int pIdCliente)
+    public Venda(int pId, String pDescricao, int pQuantidadeProduto, BigDecimal pValor, LocalDate pData, long pNotaFiscal, Produto produto, Cliente cliente)
     {
         super();
         setId(pId);
@@ -35,8 +57,8 @@ public class Venda
         setValor(pValor);
         setData(pData);
         setNotaFiscal(pNotaFiscal);
-        setIdProduto(pIdProduto);
-        setIdCliente(pIdCliente);
+        setProduto(produto);
+        setCliente(cliente);
     }
 
     // Métodos de acesso
@@ -100,24 +122,24 @@ public class Venda
         notaFiscal = pNotaFiscal;
     }
 
-    public int getIdProduto()
+    public Produto getProduto()
     {
-        return idProduto;
+        return produto;
     }
 
-    public void setIdProduto(int pIdProduto)
+    public void setProduto(Produto produto)
     {
-        idProduto = pIdProduto;
+        this.produto = produto;
     }
 
-    public int getIdCliente()
+    public Cliente getCliente()
     {
-        return idCliente;
+        return cliente;
     }
 
-    public void setIdCliente(int pIdCliente)
+    public void setCliente(Cliente cliente)
     {
-        idCliente = pIdCliente;
+        this.cliente = cliente;
     }
 
     // Métodos gerais
@@ -138,9 +160,9 @@ public class Venda
         tBuilder.append(", ");
         tBuilder.append(getNotaFiscal());
         tBuilder.append(", ");
-        tBuilder.append(getIdProduto());
+        tBuilder.append(getProduto());
         tBuilder.append(", ");
-        tBuilder.append(getIdCliente());
+        tBuilder.append(getCliente());
         tBuilder.append("]");
         return tBuilder.toString();
     }

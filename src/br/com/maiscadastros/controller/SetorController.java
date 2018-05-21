@@ -2,7 +2,6 @@ package br.com.maiscadastros.controller;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import br.com.maiscadastros.dao.SetorDao;
 import br.com.maiscadastros.dto.SetorDto;
 import br.com.maiscadastros.model.Setor;
@@ -37,10 +36,10 @@ public class SetorController {
 	        return new SetorDto(true, "Setor incluído com sucesso", tSetor);
 	    }
 
-	    public SetorDto recuperarSetor(int pId)
+	    public SetorDto recuperarSetor(Setor setor)
 	    {
 	        // Verificar as informações
-	        if (pId <=0)
+	        if (setor.getId() <=0)
 	        {
 	            return new SetorDto(false, "Identificador do Setor inválido");
 	        }
@@ -49,7 +48,7 @@ public class SetorController {
 	        SetorDao tDao = new SetorDao();
 
 	        // Recuperando o Setor
-	        Setor tSetor = tDao.recovery(pId);
+	        Setor tSetor = tDao.recovery(setor);
 	        if (tSetor == null)
 	        {
 	            return new SetorDto(false, "Não existe Setor com o identificador informado");
@@ -88,10 +87,10 @@ public class SetorController {
 	        return new SetorDto(true, "Setor alterado com sucesso", tSetor);
 	    }
 
-	    public SetorDto removeSetor(int pId)
+	    public SetorDto removeSetor(Setor setor)
 	    {
 	        // Verificar as informações
-	        if (pId <=0)
+	        if (setor.getId() <=0)
 	        {
 	            return new SetorDto(false, "Identificador do Setor inválido");
 	        }
@@ -99,15 +98,8 @@ public class SetorController {
 	        // Criando o objeto de persistência
 	        SetorDao tDao = new SetorDao();
 
-	        // Incluindo o Setor
-	        if (tDao.delete(pId))
-	        {
-	            // Retornando o indicativo de sucesso
-	            return new SetorDto(true, "Setor removido com sucesso");
-	        }
-
-	        // Retornando o indicativo de erro
-	        return new SetorDto(false, "Erro no processo de remoção");
+	        tDao.delete(setor);
+	        return new SetorDto(true, "Setor removido com sucesso");
 	    }
 	    
 	    public SetorDto pesquisarSetorsPorNome(String pNome)

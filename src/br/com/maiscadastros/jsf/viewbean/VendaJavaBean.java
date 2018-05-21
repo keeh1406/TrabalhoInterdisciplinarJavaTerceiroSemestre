@@ -32,8 +32,8 @@ public class VendaJavaBean
 	private BigDecimal valor;
 	private Date data;
 	private Long notaFiscal;
-	private Integer idProduto;
-	private Integer idCliente;
+	private Produto produto;
+	private Cliente cliente;
     private boolean edicao;
     private String  tela;
     private List<Venda> listaVenda;
@@ -108,20 +108,20 @@ public class VendaJavaBean
 		this.notaFiscal = notaFiscal;
 	}
 
-	public Integer getIdProduto() {
-		return idProduto;
+	public Produto getProduto() {
+		return produto;
 	}
 
-	public void setIdProduto(Integer idProduto) {
-		this.idProduto = idProduto;
+	public void setProduto(Produto produto) {
+		this.produto = produto;
 	}
 
-	public Integer getIdCliente() {
-		return idCliente;
+	public Cliente getCliente() {
+		return cliente;
 	}
 
-	public void setIdCliente(Integer idCliente) {
-		this.idCliente = idCliente;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 	public boolean isEdicao() {
@@ -178,8 +178,6 @@ if (tVenda2 != null)
     data = java.sql.Date.valueOf(tVenda2.getData());
     valor = tVenda2.getValor();
     notaFiscal = tVenda2.getNotaFiscal();
-    idProduto = tVenda2.getIdProduto();
-    idCliente = tVenda2.getIdCliente();
     edicao = true;
 }
 		
@@ -188,12 +186,12 @@ if (tVenda2 != null)
         if (tVenda != null)
         {
             id = tVenda.getId();
-            idProduto = tVenda.getIdProduto();
-            idCliente = tVenda.getIdCliente();
+            produto = tVenda.getProduto();
+            cliente = tVenda.getCliente();
 
             ProdutoController tProdutoController = new ProdutoController();
 
-            ProdutoDto tProdutoDto = tProdutoController.recuperarProduto(idProduto);
+            ProdutoDto tProdutoDto = tProdutoController.recuperarProduto(produto);
             if (tProdutoDto.isOk())
             {
             	Produto tProduto = tProdutoDto.getProduto();
@@ -206,7 +204,7 @@ if (tVenda2 != null)
             
             ClienteController tClienteController = new ClienteController();
 
-            ClienteDto tClienteDto = tClienteController.recuperarCliente(idCliente);
+            ClienteDto tClienteDto = tClienteController.recuperarCliente(cliente);
             if (tClienteDto.isOk())
             {
             	Cliente tCliente = tClienteDto.getCliente();
@@ -259,8 +257,8 @@ if (tVenda2 != null)
         valor = null;
         data = null;
         notaFiscal = null;
-        idProduto = null;
-        idCliente = null;
+        produto = null;
+        cliente = null;
         edicao = false;
 
         return tela;
@@ -278,8 +276,8 @@ if (tVenda2 != null)
 	    LocalDate tData = new java.sql.Date(data.getTime()).toLocalDate();
 	    tVenda.setData(tData);
 	    tVenda.setNotaFiscal(notaFiscal);
-	    tVenda.setIdProduto(idProduto);
-	    tVenda.setIdCliente(idCliente);
+	    tVenda.setProduto(produto);
+	    tVenda.setCliente(cliente);
 
 	    VendaController tController = new VendaController();
 
@@ -316,8 +314,8 @@ if (tVenda2 != null)
 	        LocalDate tData = new java.sql.Date(data.getTime()).toLocalDate();
 	        tVenda.setData(tData);
 	        tVenda.setNotaFiscal(notaFiscal);
-	        tVenda.setIdProduto(idProduto);
-	        tVenda.setIdCliente(idCliente);
+	        tVenda.setProduto(produto);
+	        tVenda.setCliente(cliente);
 
 	        VendaController tController = new VendaController();
 
@@ -342,13 +340,13 @@ if (tVenda2 != null)
 	        return null;
 	    }
 
-	    public String consultar()
+	    public String consultar(Venda venda)
 	    {
 	        System.out.println("VendaVB - Consultar : " + this);
 
 	        VendaController tController = new VendaController();
 
-	        VendaDto tDto = tController.recuperarVenda(id);
+	        VendaDto tDto = tController.recuperarVenda(venda);
 	        if (tDto.isOk())
 	        {
 	            // Ok, recuperado
@@ -359,8 +357,8 @@ if (tVenda2 != null)
 	            valor = tVenda.getValor();
 	            data = java.sql.Date.valueOf(tVenda.getData());
 	            notaFiscal = tVenda.getNotaFiscal();
-	            idProduto = tVenda.getIdProduto();
-	            idCliente = tVenda.getIdCliente();
+	            produto = tVenda.getProduto();
+	            cliente = tVenda.getCliente();
 
 	            // indicando que a pesquisa deu certo
 	            edicao = true;
@@ -379,13 +377,13 @@ if (tVenda2 != null)
 	        return tela;
 	    }
 
-	    public String excluir()
+	    public String excluir(Venda venda)
 	    {
 	        System.out.println("VendaVB - Excluir : " + this);
 
 	        VendaController tController = new VendaController();
 
-	        VendaDto tDto = tController.removeVenda(id);
+	        VendaDto tDto = tController.removeVenda(venda);
 	        if (tDto.isOk())
 	        {
 	            // Ok, exluido
@@ -456,9 +454,9 @@ if (tVenda2 != null)
 	    tBuilder.append(", ");
 	    tBuilder.append(notaFiscal);
 	    tBuilder.append(", ");
-	    tBuilder.append(idProduto);
+	    tBuilder.append(produto);
 	    tBuilder.append(", ");
-	    tBuilder.append(idCliente);
+	    tBuilder.append(cliente);
 	    tBuilder.append("]");
 	    return tBuilder.toString();
 	}

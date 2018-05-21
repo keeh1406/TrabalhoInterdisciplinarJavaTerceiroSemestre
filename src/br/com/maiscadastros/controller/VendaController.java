@@ -17,7 +17,7 @@ public class VendaController {
 		VendaDao tDao = new VendaDao();
 
 		// Verificando se o Venda já existe
-		Venda tVenda = tDao.recovery(pVenda.getId());
+		Venda tVenda = tDao.recoveryByNotaFiscal(pVenda.getNotaFiscal());
 		if (tVenda != null) {
 			return new VendaDto(false, "Já existe uma Venda com o id informado");
 		}
@@ -32,9 +32,9 @@ public class VendaController {
 		return new VendaDto(true, "Venda incluída com sucesso", tVenda);
 	}
 
-	public VendaDto recuperarVenda(int pId) {
+	public VendaDto recuperarVenda(Venda venda) {
 		// Verificar as informações
-		if (pId <= 0) {
+		if (venda.getId() <= 0) {
 			return new VendaDto(false, "Identificador do Venda inválido");
 		}
 
@@ -42,7 +42,7 @@ public class VendaController {
 		VendaDao tDao = new VendaDao();
 
 		// Recuperando o Venda
-		Venda tVenda = tDao.recovery(pId);
+		Venda tVenda = tDao.recovery(venda);
 		if (tVenda == null) {
 			return new VendaDto(false, "Não existe Venda com o identificador informado");
 		}
@@ -51,9 +51,9 @@ public class VendaController {
 		return new VendaDto(true, "Venda recuperado com sucesso", tVenda);
 	}
 
-	public VendaDto atualizarVenda(Venda pVenda) {
+	public VendaDto atualizarVenda(Venda venda) {
 		// Verificar as informações
-		if (pVenda == null) {
+		if (venda == null) {
 			return new VendaDto(false, "Tentativa de atualização de Venda nulo");
 		}
 
@@ -61,21 +61,22 @@ public class VendaController {
 		VendaDao tDao = new VendaDao();
 
 		// Recuperando o Venda
-		Venda tVenda = tDao.recovery(pVenda.getId());
-		if (tVenda == null) {
-			return new VendaDto(false, "Não existe Venda com o identificador informado");
-		}
+		Venda tVenda = tDao.recovery(venda);
+		if (tVenda == null)
+        {
+            return new VendaDto(false, "Não existe Loja com o identificador informado");
+        }
 
-		if (pVenda.getNotaFiscal() != tVenda.getNotaFiscal()) {
+		if (venda.getNotaFiscal() != tVenda.getNotaFiscal()) {
 			// Verificando se existe um Venda com o novo CPF
-			tVenda = tDao.recoveryByNotaFiscal(pVenda.getNotaFiscal());
+			tVenda = tDao.recoveryByNotaFiscal(venda.getNotaFiscal());
 			if (tVenda != null) {
 				return new VendaDto(false, "Já existe Venda com a Nota Fiscal informada");
 			}
 		}
 
 		// Atualizando o Venda
-		tVenda = tDao.update(pVenda);
+		tVenda = tDao.update(venda);
 		if (tVenda == null) {
 			return new VendaDto(false, "Não existe Venda com o identificador informado");
 		}
@@ -84,24 +85,20 @@ public class VendaController {
 		return new VendaDto(true, "Venda alterado com sucesso", tVenda);
 	}
 
-	public VendaDto removeVenda(int pId) {
-		// Verificar as informações
-		if (pId <= 0) {
-			return new VendaDto(false, "Identificador do Venda inválido");
-		}
+	public VendaDto removeVenda(Venda venda)
+    {
+        // Verificar as informações
+        if (venda.getId() <=0)
+        {
+            return new VendaDto(false, "Identificador da Venda inválido");
+        }
 
-		// Criando o objeto de persistência
-		VendaDao tDao = new VendaDao();
+        // Criando o objeto de persistência
+        VendaDao tDao = new VendaDao();
 
-		// Incluindo o Venda
-		if (tDao.delete(pId)) {
-			// Retornando o indicativo de sucesso
-			return new VendaDto(true, "Venda removido com sucesso");
-		}
-
-		// Retornando o indicativo de erro
-		return new VendaDto(false, "Erro no processo de remoção");
-	}
+        tDao.delete(venda);
+        return new VendaDto(true, "Venda removida com sucesso");
+    }
 
 	public VendaDto pesquisarVendasPorDescricao(String pDescricao) {
 		// Criando a lista de retorno

@@ -4,17 +4,29 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import br.com.maiscadastros.model.Usuario;
 
 @Entity
+@Table(name = "TABELA_CLIENTE")
 public class Cliente extends Usuario
 {
     // Atributos
-	@Column private LocalDate dataNascimento;
-	@Column private long      telefone;
-	@Column private long      cpf;
-	@Column private String    endereco;
+	@Column (name = "DataNascimento_Cliente")
+	private LocalDate dataNascimento;
+	
+	@Column (name = "Telefone_Cliente")
+	private long      telefone;
+	
+	@Column (name = "CPF_Cliente")
+	private long      cpf;
+	
+	@ManyToOne
+	@JoinColumn (name = "Endereco_Cliente")
+	private String    endereco;
 
     // Construtores
     public Cliente()
