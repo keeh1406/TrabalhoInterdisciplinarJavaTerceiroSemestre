@@ -29,7 +29,9 @@ public class VendaJavaBean
 	private String nomeProduto;
 	private String nomeCliente;
 	private Integer quantidadeProduto;
-	private BigDecimal valor;
+	private BigDecimal valorTotal;
+	private BigDecimal valorUnitario;
+	private String pagamento;
 	private Date data;
 	private Long notaFiscal;
 	private Produto produto;
@@ -84,12 +86,28 @@ public class VendaJavaBean
 		this.quantidadeProduto = quantidadeProduto;
 	}
 
-	public BigDecimal getValor() {
-		return valor;
+	public BigDecimal getValorTotal() {
+		return valorTotal;
 	}
 
-	public void setValor(BigDecimal valor) {
-		this.valor = valor;
+	public void setValorTotal(BigDecimal valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+	
+	public BigDecimal getValorUnitario() {
+		return valorUnitario;
+	}
+
+	public void setValorUnitario(BigDecimal valorUnitario) {
+		this.valorUnitario = valorUnitario;
+	}
+	
+	public String getPagamento() {
+		return pagamento;
+	}
+
+	public void setPagamento(String pagamento) {
+		this.pagamento = pagamento;
 	}
 
 	public Date getData() {
@@ -174,9 +192,10 @@ if (tVenda2 != null)
     id = tVenda2.getId();
     descricao = tVenda2.getDescricao();
     quantidadeProduto = tVenda2.getQuantidadeProduto();
-    valor = tVenda2.getValor();
+    valorTotal = tVenda2.getValorTotal();
+    valorUnitario = tVenda2.getValorUnitario();
+    pagamento = tVenda2.getPagamento();
     data = java.sql.Date.valueOf(tVenda2.getData());
-    valor = tVenda2.getValor();
     notaFiscal = tVenda2.getNotaFiscal();
     edicao = true;
 }
@@ -254,7 +273,9 @@ if (tVenda2 != null)
         id = null;
         descricao = null;
         quantidadeProduto = null;
-        valor = null;
+        valorTotal = null;
+        valorUnitario = null;
+        pagamento = null;
         data = null;
         notaFiscal = null;
         produto = null;
@@ -272,7 +293,9 @@ if (tVenda2 != null)
 	    Venda tVenda = new Venda();
 	    tVenda.setDescricao(descricao);
 	    tVenda.setQuantidadeProduto(quantidadeProduto);
-	    tVenda.setValor(valor);
+	    tVenda.setValorTotal(valorTotal);
+	    tVenda.setValorUnitario(valorUnitario);
+	    tVenda.setPagamento(pagamento);
 	    LocalDate tData = new java.sql.Date(data.getTime()).toLocalDate();
 	    tVenda.setData(tData);
 	    tVenda.setNotaFiscal(notaFiscal);
@@ -310,7 +333,9 @@ if (tVenda2 != null)
 	        tVenda.setId(id);
 	        tVenda.setDescricao(descricao);
 	        tVenda.setQuantidadeProduto(quantidadeProduto);
-	        tVenda.setValor(valor);
+	        tVenda.setValorTotal(valorTotal);
+	        tVenda.setValorUnitario(valorUnitario);
+	        tVenda.setPagamento(pagamento);
 	        LocalDate tData = new java.sql.Date(data.getTime()).toLocalDate();
 	        tVenda.setData(tData);
 	        tVenda.setNotaFiscal(notaFiscal);
@@ -354,7 +379,9 @@ if (tVenda2 != null)
 	            id = tVenda.getId();
 	            descricao = tVenda.getDescricao();
 	            quantidadeProduto = tVenda.getQuantidadeProduto();
-	            valor = tVenda.getValor();
+	            valorTotal = tVenda.getValorTotal();
+	            valorUnitario = tVenda.getValorUnitario();
+	            pagamento = tVenda.getPagamento();
 	            data = java.sql.Date.valueOf(tVenda.getData());
 	            notaFiscal = tVenda.getNotaFiscal();
 	            produto = tVenda.getProduto();
@@ -448,7 +475,11 @@ if (tVenda2 != null)
         tBuilder.append(", ");
 	    tBuilder.append(quantidadeProduto);
 	    tBuilder.append(", ");
-	    tBuilder.append(valor);
+	    tBuilder.append(valorTotal);
+	    tBuilder.append(", ");
+	    tBuilder.append(valorUnitario);
+	    tBuilder.append(", ");
+	    tBuilder.append(pagamento);
 	    tBuilder.append(", ");
 	    tBuilder.append(data);
 	    tBuilder.append(", ");

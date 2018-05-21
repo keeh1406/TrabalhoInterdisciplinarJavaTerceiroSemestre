@@ -25,7 +25,13 @@ public class Venda
 	private int         quantidadeProduto;
 	
 	@Column (name = "Valor_Venda")
-	private BigDecimal  valor;
+	private BigDecimal  valorTotal;
+	
+	@Column (name = "Valor_Unitario_Venda")
+	private BigDecimal   valorUnitario;
+	
+	@Column (name = "Forma_Pagamento_Venda")
+	private String   pagamento;
 	
 	@Column (name = "Data_Venda")
 	private LocalDate   data;
@@ -48,13 +54,15 @@ public class Venda
         super();
     }
 
-    public Venda(int pId, String pDescricao, int pQuantidadeProduto, BigDecimal pValor, LocalDate pData, long pNotaFiscal, Produto produto, Cliente cliente)
+    public Venda(int pId, String pDescricao, int pQuantidadeProduto, BigDecimal pValorTotal, String pPagamento, BigDecimal pValorUnitario, LocalDate pData, long pNotaFiscal, Produto produto, Cliente cliente)
     {
         super();
         setId(pId);
         setDescricao(pDescricao);
         setQuantidadeProduto(pQuantidadeProduto);
-        setValor(pValor);
+        setValorTotal(pValorTotal);
+        setValorUnitario(pValorUnitario);
+        setPagamento(pPagamento);
         setData(pData);
         setNotaFiscal(pNotaFiscal);
         setProduto(produto);
@@ -92,14 +100,34 @@ public class Venda
         quantidadeProduto = pQuantidadeProduto;
     }
 
-    public BigDecimal getValor()
+    public BigDecimal getValorTotal()
     {
-        return valor;
+        return valorTotal;
     }
 
-    public void setValor(BigDecimal pValor)
+    public void setValorTotal(BigDecimal pValorTotal)
     {
-        valor = pValor;
+        valorTotal = pValorTotal;
+    }
+    
+    public BigDecimal getValorUnitario()
+    {
+        return valorTotal;
+    }
+
+    public void setValorUnitario(BigDecimal pValorUnitario)
+    {
+        valorUnitario = pValorUnitario;
+    }
+
+    public String getPagamento()
+    {
+        return pagamento;
+    }
+
+    public void setPagamento(String pPagamento)
+    {
+        pagamento = pPagamento;
     }
 
     public LocalDate getData()
@@ -154,7 +182,11 @@ public class Venda
         tBuilder.append(", ");
         tBuilder.append(getQuantidadeProduto());
         tBuilder.append(", ");
-        tBuilder.append(getValor());
+        tBuilder.append(getValorTotal());
+        tBuilder.append(", ");
+        tBuilder.append(getValorUnitario());
+        tBuilder.append(", ");
+        tBuilder.append(getPagamento());
         tBuilder.append(", ");
         tBuilder.append(getData());
         tBuilder.append(", ");
