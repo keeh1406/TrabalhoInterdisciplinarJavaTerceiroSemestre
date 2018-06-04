@@ -1,7 +1,6 @@
 package br.com.maiscadastros.model;
 
-import java.time.LocalDate;
-
+import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -24,8 +23,8 @@ public class Produto
 	@Column (name = "Descricao_Produto")
 	private String      descricao;
 	
-	@Column (name = "DataValidade_Produto")
-	private LocalDate   dataValidade;
+	@Column (name = "Valor_Unitario_Venda")
+	private BigDecimal   valorUnitario;
 	
 	@ManyToOne
 	@JoinColumn (name = "ID_Loja")
@@ -45,13 +44,13 @@ public class Produto
         super();
     }
 
-    public Produto(int pId, String pNome, String pDescricao, LocalDate pDataValidade, Loja loja, Setor setor, Marca marca)
+    public Produto(int pId, String pNome, String pDescricao, BigDecimal pValorUnitario, Loja loja, Setor setor, Marca marca)
     {
         super();
         setId(pId);
         setNome(pNome);
         setDescricao(pDescricao);
-        setDataValidade(pDataValidade);
+        setValorUnitario(pValorUnitario);
         setLoja(loja);
         setSetor(setor);
         setMarca(marca);
@@ -88,16 +87,16 @@ public class Produto
         descricao = pDescricao;
     }
 
-    public LocalDate getDataValidade()
+    public BigDecimal getValorUnitario()
     {
-        return dataValidade;
+        return valorUnitario;
     }
 
-    public void setDataValidade(LocalDate pDataValidade)
+    public void setValorUnitario(BigDecimal pValorUnitario)
     {
-        dataValidade = pDataValidade;
+        valorUnitario = pValorUnitario;
     }
-
+    
     public Loja getLoja() {
 		return loja;
 	}
@@ -138,7 +137,7 @@ public class Produto
         tBuilder.append(", ");
         tBuilder.append(getDescricao());
         tBuilder.append(", ");
-        tBuilder.append(getDataValidade());
+        tBuilder.append(getValorUnitario());
         tBuilder.append(", ");
         tBuilder.append(getLoja());
         tBuilder.append(", ");

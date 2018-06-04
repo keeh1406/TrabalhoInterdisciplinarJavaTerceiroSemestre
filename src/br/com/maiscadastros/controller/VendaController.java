@@ -17,7 +17,7 @@ public class VendaController {
 		VendaDao tDao = new VendaDao();
 
 		// Verificando se o Venda já existe
-		Venda tVenda = tDao.recoveryByNotaFiscal(pVenda.getNotaFiscal());
+		Venda tVenda = tDao.recoveryById(pVenda.getId());
 		if (tVenda != null) {
 			return new VendaDto(false, "Já existe uma Venda com o id informado");
 		}
@@ -67,11 +67,11 @@ public class VendaController {
             return new VendaDto(false, "Não existe Loja com o identificador informado");
         }
 
-		if (venda.getNotaFiscal() != tVenda.getNotaFiscal()) {
+		if (venda.getId() != tVenda.getId()) {
 			// Verificando se existe um Venda com o novo CPF
-			tVenda = tDao.recoveryByNotaFiscal(venda.getNotaFiscal());
-			if (tVenda != null) {
-				return new VendaDto(false, "Já existe Venda com a Nota Fiscal informada");
+			Venda tVenda2 = tDao.recoveryById(tVenda.getId());
+			if (tVenda2 != null) {
+				return new VendaDto(false, "Já existe Venda com o id informado");
 			}
 		}
 

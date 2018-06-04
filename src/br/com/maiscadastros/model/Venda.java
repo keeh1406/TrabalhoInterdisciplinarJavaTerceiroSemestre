@@ -21,14 +21,8 @@ public class Venda
 	@Column (name = "Descricao_Venda")
 	private String      descricao;
 	
-	@Column (name = "QuantidadeProduto_Venda")
-	private int         quantidadeProduto;
-	
 	@Column (name = "Valor_Venda")
 	private BigDecimal  valorTotal;
-	
-	@Column (name = "Valor_Unitario_Venda")
-	private BigDecimal   valorUnitario;
 	
 	@Column (name = "Forma_Pagamento_Venda")
 	private String   pagamento;
@@ -36,8 +30,8 @@ public class Venda
 	@Column (name = "Data_Venda")
 	private LocalDate   data;
 	
-	@Column (name = "NotaFiscal_Venda")
-	private long        notaFiscal;
+	@Column (name = "Fechado")
+	private Boolean   fechado;
 	
 	@ManyToOne
 	@JoinColumn (name = "ID_Produto")
@@ -54,17 +48,15 @@ public class Venda
         super();
     }
 
-    public Venda(int pId, String pDescricao, int pQuantidadeProduto, BigDecimal pValorTotal, String pPagamento, BigDecimal pValorUnitario, LocalDate pData, long pNotaFiscal, Produto produto, Cliente cliente)
+    public Venda(int pId, String pDescricao, BigDecimal pValorTotal, String pPagamento, LocalDate pData, Boolean pFechado, Produto produto, Cliente cliente)
     {
         super();
         setId(pId);
         setDescricao(pDescricao);
-        setQuantidadeProduto(pQuantidadeProduto);
         setValorTotal(pValorTotal);
-        setValorUnitario(pValorUnitario);
         setPagamento(pPagamento);
         setData(pData);
-        setNotaFiscal(pNotaFiscal);
+        setFechado(pFechado);
         setProduto(produto);
         setCliente(cliente);
     }
@@ -90,16 +82,6 @@ public class Venda
         descricao = pDescricao;
     }
 
-    public int getQuantidadeProduto()
-    {
-        return quantidadeProduto;
-    }
-
-    public void setQuantidadeProduto(int pQuantidadeProduto)
-    {
-        quantidadeProduto = pQuantidadeProduto;
-    }
-
     public BigDecimal getValorTotal()
     {
         return valorTotal;
@@ -108,16 +90,6 @@ public class Venda
     public void setValorTotal(BigDecimal pValorTotal)
     {
         valorTotal = pValorTotal;
-    }
-    
-    public BigDecimal getValorUnitario()
-    {
-        return valorTotal;
-    }
-
-    public void setValorUnitario(BigDecimal pValorUnitario)
-    {
-        valorUnitario = pValorUnitario;
     }
 
     public String getPagamento()
@@ -140,16 +112,6 @@ public class Venda
         data = pData;
     }
     
-    public long getNotaFiscal()
-    {
-        return notaFiscal;
-    }
-
-    public void setNotaFiscal(long pNotaFiscal)
-    {
-        notaFiscal = pNotaFiscal;
-    }
-
     public Produto getProduto()
     {
         return produto;
@@ -170,7 +132,21 @@ public class Venda
         this.cliente = cliente;
     }
 
-    // Métodos gerais
+    /**
+	 * @return the fechado
+	 */
+	public Boolean getFechado() {
+		return fechado;
+	}
+
+	/**
+	 * @param fechado the fechado to set
+	 */
+	public void setFechado(Boolean fechado) {
+		this.fechado = fechado;
+	}
+
+	// Métodos gerais
     @Override
     public String toString()
     {
@@ -180,17 +156,13 @@ public class Venda
         tBuilder.append(", ");
         tBuilder.append(getDescricao());
         tBuilder.append(", ");
-        tBuilder.append(getQuantidadeProduto());
-        tBuilder.append(", ");
         tBuilder.append(getValorTotal());
-        tBuilder.append(", ");
-        tBuilder.append(getValorUnitario());
         tBuilder.append(", ");
         tBuilder.append(getPagamento());
         tBuilder.append(", ");
         tBuilder.append(getData());
         tBuilder.append(", ");
-        tBuilder.append(getNotaFiscal());
+        tBuilder.append(getFechado());
         tBuilder.append(", ");
         tBuilder.append(getProduto());
         tBuilder.append(", ");

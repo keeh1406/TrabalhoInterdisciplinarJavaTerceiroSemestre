@@ -30,10 +30,9 @@ public class VendaJavaBean
 	private String nomeCliente;
 	private Integer quantidadeProduto;
 	private BigDecimal valorTotal;
-	private BigDecimal valorUnitario;
 	private String pagamento;
+	private Boolean fechado;
 	private Date data;
-	private Long notaFiscal;
 	private Produto produto;
 	private Cliente cliente;
     private boolean edicao;
@@ -94,14 +93,6 @@ public class VendaJavaBean
 		this.valorTotal = valorTotal;
 	}
 	
-	public BigDecimal getValorUnitario() {
-		return valorUnitario;
-	}
-
-	public void setValorUnitario(BigDecimal valorUnitario) {
-		this.valorUnitario = valorUnitario;
-	}
-	
 	public String getPagamento() {
 		return pagamento;
 	}
@@ -118,12 +109,12 @@ public class VendaJavaBean
 		this.data = data;
 	}
 
-	public Long getNotaFiscal() {
-		return notaFiscal;
+	public Boolean getFechamento() {
+		return fechado;
 	}
 
-	public void setNotaFiscal(Long notaFiscal) {
-		this.notaFiscal = notaFiscal;
+	public void setFechado(Boolean fechado) {
+		this.fechado = fechado;
 	}
 
 	public Produto getProduto() {
@@ -191,12 +182,9 @@ if (tVenda2 != null)
 {
     id = tVenda2.getId();
     descricao = tVenda2.getDescricao();
-    quantidadeProduto = tVenda2.getQuantidadeProduto();
     valorTotal = tVenda2.getValorTotal();
-    valorUnitario = tVenda2.getValorUnitario();
     pagamento = tVenda2.getPagamento();
     data = java.sql.Date.valueOf(tVenda2.getData());
-    notaFiscal = tVenda2.getNotaFiscal();
     edicao = true;
 }
 		
@@ -274,10 +262,9 @@ if (tVenda2 != null)
         descricao = null;
         quantidadeProduto = null;
         valorTotal = null;
-        valorUnitario = null;
         pagamento = null;
+        fechado = null;
         data = null;
-        notaFiscal = null;
         produto = null;
         cliente = null;
         edicao = false;
@@ -292,13 +279,11 @@ if (tVenda2 != null)
 
 	    Venda tVenda = new Venda();
 	    tVenda.setDescricao(descricao);
-	    tVenda.setQuantidadeProduto(quantidadeProduto);
 	    tVenda.setValorTotal(valorTotal);
-	    tVenda.setValorUnitario(valorUnitario);
 	    tVenda.setPagamento(pagamento);
+	    tVenda.setFechado(fechado);
 	    LocalDate tData = new java.sql.Date(data.getTime()).toLocalDate();
 	    tVenda.setData(tData);
-	    tVenda.setNotaFiscal(notaFiscal);
 	    tVenda.setProduto(produto);
 	    tVenda.setCliente(cliente);
 
@@ -332,13 +317,11 @@ if (tVenda2 != null)
 	        Venda tVenda = new Venda();
 	        tVenda.setId(id);
 	        tVenda.setDescricao(descricao);
-	        tVenda.setQuantidadeProduto(quantidadeProduto);
 	        tVenda.setValorTotal(valorTotal);
-	        tVenda.setValorUnitario(valorUnitario);
 	        tVenda.setPagamento(pagamento);
+	        tVenda.setFechado(fechado);
 	        LocalDate tData = new java.sql.Date(data.getTime()).toLocalDate();
 	        tVenda.setData(tData);
-	        tVenda.setNotaFiscal(notaFiscal);
 	        tVenda.setProduto(produto);
 	        tVenda.setCliente(cliente);
 
@@ -378,12 +361,10 @@ if (tVenda2 != null)
 	            Venda tVenda = tDto.getVenda();
 	            id = tVenda.getId();
 	            descricao = tVenda.getDescricao();
-	            quantidadeProduto = tVenda.getQuantidadeProduto();
 	            valorTotal = tVenda.getValorTotal();
-	            valorUnitario = tVenda.getValorUnitario();
 	            pagamento = tVenda.getPagamento();
+	            fechado = tVenda.getFechado();
 	            data = java.sql.Date.valueOf(tVenda.getData());
-	            notaFiscal = tVenda.getNotaFiscal();
 	            produto = tVenda.getProduto();
 	            cliente = tVenda.getCliente();
 
@@ -472,18 +453,14 @@ if (tVenda2 != null)
 	    tBuilder.append(nomeProduto);
         tBuilder.append(", ");
 	    tBuilder.append(nomeCliente);
-        tBuilder.append(", ");
-	    tBuilder.append(quantidadeProduto);
 	    tBuilder.append(", ");
 	    tBuilder.append(valorTotal);
 	    tBuilder.append(", ");
-	    tBuilder.append(valorUnitario);
-	    tBuilder.append(", ");
 	    tBuilder.append(pagamento);
 	    tBuilder.append(", ");
-	    tBuilder.append(data);
+	    tBuilder.append(fechado);
 	    tBuilder.append(", ");
-	    tBuilder.append(notaFiscal);
+	    tBuilder.append(data);
 	    tBuilder.append(", ");
 	    tBuilder.append(produto);
 	    tBuilder.append(", ");

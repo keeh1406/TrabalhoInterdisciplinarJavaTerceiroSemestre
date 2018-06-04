@@ -1,8 +1,7 @@
 package br.com.maiscadastros.jsf.viewbean;
 
-import java.util.Date;
 import java.util.List;
-import java.time.LocalDate;
+import java.math.BigDecimal;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -22,28 +21,27 @@ import br.com.maiscadastros.model.Produto;
 import br.com.maiscadastros.model.Setor;
 
 @ViewScoped
-@ManagedBean(name="ProdutoVB")
-public class ProdutoJavaBean 
-{
-    // Atributos - Valores dos componentes visuais
+@ManagedBean(name = "ProdutoVB")
+public class ProdutoJavaBean {
+	// Atributos - Valores dos componentes visuais
 	private Integer id;
 	private String nome;
 	private String nomeLoja;
 	private String nomeSetor;
 	private String nomeMarca;
 	private String descricao;
-	private Date dataValidade;
+	private BigDecimal valorUnitario;
 	private Loja loja;
 	private Marca marca;
 	private Setor setor;
-    private boolean edicao;
-    private String  tela;
-    private List<Produto> listaProduto;
-    private List<Loja> listaLoja;
-    private List<Setor> listaSetor;
-    private List<Marca> listaMarca;
-     
-    public Integer getId() {
+	private boolean edicao;
+	private String tela;
+	private List<Produto> listaProduto;
+	private List<Loja> listaLoja;
+	private List<Setor> listaSetor;
+	private List<Marca> listaMarca;
+
+	public Integer getId() {
 		return id;
 	}
 
@@ -58,36 +56,30 @@ public class ProdutoJavaBean
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	public String getNomeLoja()
-    {
-        return nomeLoja;
-    }
 
-    public void setNomeLoja(String pNomeLoja)
-    {
-        nomeLoja = pNomeLoja;
-    }
-    
-    public String getNomeSetor()
-    {
-        return nomeSetor;
-    }
+	public String getNomeLoja() {
+		return nomeLoja;
+	}
 
-    public void setNomeSetor(String pNomeSetor)
-    {
-        nomeSetor = pNomeSetor;
-    }
-    
-    public String getNomeMarca()
-    {
-        return nomeMarca;
-    }
+	public void setNomeLoja(String pNomeLoja) {
+		nomeLoja = pNomeLoja;
+	}
 
-    public void setNomeMarca(String pNomeMarca)
-    {
-        nomeMarca = pNomeMarca;
-    }
+	public String getNomeSetor() {
+		return nomeSetor;
+	}
+
+	public void setNomeSetor(String pNomeSetor) {
+		nomeSetor = pNomeSetor;
+	}
+
+	public String getNomeMarca() {
+		return nomeMarca;
+	}
+
+	public void setNomeMarca(String pNomeMarca) {
+		nomeMarca = pNomeMarca;
+	}
 
 	public String getDescricao() {
 		return descricao;
@@ -97,12 +89,12 @@ public class ProdutoJavaBean
 		this.descricao = descricao;
 	}
 
-	public Date getDataValidade() {
-		return dataValidade;
+	public BigDecimal getValorUnitario() {
+		return valorUnitario;
 	}
 
-	public void setDataValidade(Date dataValidade) {
-		this.dataValidade = dataValidade;
+	public void setValorUnitario(BigDecimal valorUnitario) {
+		this.valorUnitario = valorUnitario;
 	}
 
 	public Loja getLoja() {
@@ -112,7 +104,7 @@ public class ProdutoJavaBean
 	public void setLoja(Loja loja) {
 		this.loja = loja;
 	}
-	
+
 	public Marca getMarca() {
 		return marca;
 	}
@@ -120,7 +112,7 @@ public class ProdutoJavaBean
 	public void setMarca(Marca marca) {
 		this.marca = marca;
 	}
-	
+
 	public Setor getSetor() {
 		return setor;
 	}
@@ -152,7 +144,7 @@ public class ProdutoJavaBean
 	public void setListaProduto(List<Produto> listaProduto) {
 		this.listaProduto = listaProduto;
 	}
-	
+
 	public List<Loja> getListaLoja() {
 		return listaLoja;
 	}
@@ -160,7 +152,7 @@ public class ProdutoJavaBean
 	public void setListaLoja(List<Loja> listaLoja) {
 		this.listaLoja = listaLoja;
 	}
-	
+
 	public List<Setor> getListaSetor() {
 		return listaSetor;
 	}
@@ -168,7 +160,7 @@ public class ProdutoJavaBean
 	public void setListaSetor(List<Setor> listaSetor) {
 		this.listaSetor = listaSetor;
 	}
-	
+
 	public List<Marca> getListaMarca() {
 		return listaMarca;
 	}
@@ -176,319 +168,272 @@ public class ProdutoJavaBean
 	public void setListaMarca(List<Marca> listaMarca) {
 		this.listaMarca = listaMarca;
 	}
-	
+
 	@PostConstruct
-    public void init()
-    {
-		Produto tProduto2 = (Produto) FacesContext.getCurrentInstance().getExternalContext().getRequestMap().get("PRODUTO");
-if (tProduto2 != null)
-{
-    id = tProduto2.getId();
-    nome = tProduto2.getNome();
-    descricao = tProduto2.getDescricao();
-    dataValidade = java.sql.Date.valueOf(tProduto2.getDataValidade());
-    edicao = true;
-}
-        Produto tProduto = (Produto) FacesContext.getCurrentInstance().getExternalContext().getRequestMap().get("PRODUTO");
-        if (tProduto != null)
-        {
-            id = tProduto.getId();
-            loja = tProduto.getLoja();
-            marca = tProduto.getMarca();
-            setor = tProduto.getSetor();
+	public void init() {
+		Produto tProduto2 = (Produto) FacesContext.getCurrentInstance().getExternalContext().getRequestMap()
+				.get("PRODUTO");
+		if (tProduto2 != null) {
+			id = tProduto2.getId();
+			nome = tProduto2.getNome();
+			descricao = tProduto2.getDescricao();
+			valorUnitario = tProduto2.getValorUnitario();
+			edicao = true;
+		}
+		Produto tProduto = (Produto) FacesContext.getCurrentInstance().getExternalContext().getRequestMap()
+				.get("PRODUTO");
+		if (tProduto != null) {
+			id = tProduto.getId();
+			loja = tProduto.getLoja();
+			marca = tProduto.getMarca();
+			setor = tProduto.getSetor();
 
-            LojaController tLojaController = new LojaController();
+			LojaController tLojaController = new LojaController();
 
-            LojaDto tLojaDto = tLojaController.recuperarLoja(loja);
-            if (tLojaDto.isOk())
-            {
-                Loja tLoja = tLojaDto.getLoja();
-                nomeLoja = tLoja.getNome();
-            }
-            else
-            {
-                nomeLoja=null;
-            }
-            
-            MarcaController tMarcaController = new MarcaController();
+			LojaDto tLojaDto = tLojaController.recuperarLoja(loja);
+			if (tLojaDto.isOk()) {
+				Loja tLoja = tLojaDto.getLoja();
+				nomeLoja = tLoja.getNome();
+			} else {
+				nomeLoja = null;
+			}
 
-            MarcaDto tMarcaDto = tMarcaController.recuperarMarca(marca);
-            if (tMarcaDto.isOk())
-            {
-                Marca tMarca = tMarcaDto.getMarca();
-                nomeMarca = tMarca.getNome();
-            }
-            else
-            {
-                nomeMarca=null;
-            }
-            
-            SetorController tSetorController = new SetorController();
+			MarcaController tMarcaController = new MarcaController();
 
-            SetorDto tSetorDto = tSetorController.recuperarSetor(setor);
-            if (tSetorDto.isOk())
-            {
-                Setor tSetor = tSetorDto.getSetor();
-                nomeSetor = tSetor.getNome();
-            }
-            else
-            {
-                nomeSetor=null;
-            }
-        }
-        
-        LojaController tController = new LojaController();
+			MarcaDto tMarcaDto = tMarcaController.recuperarMarca(marca);
+			if (tMarcaDto.isOk()) {
+				Marca tMarca = tMarcaDto.getMarca();
+				nomeMarca = tMarca.getNome();
+			} else {
+				nomeMarca = null;
+			}
 
-        LojaDto tDto = tController.pesquisarLoja();
-        if (tDto.isOk())
-        {
-            // Ok, recuperado
-            listaLoja = tDto.getLista();
-        }
-        else
-        {
-            // Colocando a mensagem do sistema
-            FacesContext.getCurrentInstance().addMessage(null,
-                            new FacesMessage(FacesMessage.SEVERITY_ERROR, tDto.getMensagem(), tDto.getMensagem()));
-        }
-        
-        MarcaController tController1 = new MarcaController();
+			SetorController tSetorController = new SetorController();
 
-        MarcaDto tDto1 = tController1.pesquisarMarca();
-        if (tDto1.isOk())
-        {
-            // Ok, recuperado
-            listaMarca = tDto1.getLista();
-        }
-        else
-        {
-            // Colocando a mensagem do sistema
-            FacesContext.getCurrentInstance().addMessage(null,
-                            new FacesMessage(FacesMessage.SEVERITY_ERROR, tDto1.getMensagem(), tDto1.getMensagem()));
-        }
-        
-        SetorController tController11 = new SetorController();
+			SetorDto tSetorDto = tSetorController.recuperarSetor(setor);
+			if (tSetorDto.isOk()) {
+				Setor tSetor = tSetorDto.getSetor();
+				nomeSetor = tSetor.getNome();
+			} else {
+				nomeSetor = null;
+			}
+		}
 
-        SetorDto tDto11 = tController11.pesquisarSetor();
-        if (tDto11.isOk())
-        {
-            // Ok, recuperado
-            listaSetor = tDto11.getLista();
-        }
-        else
-        {
-            // Colocando a mensagem do sistema
-            FacesContext.getCurrentInstance().addMessage(null,
-                            new FacesMessage(FacesMessage.SEVERITY_ERROR, tDto11.getMensagem(), tDto11.getMensagem()));
-        }
-        
-        
-    }
-	
-	
+		LojaController tController = new LojaController();
 
-	// Métodos da Controller
-    public String limpar()
-    {
-        id = null;
-        nome = null;
-        descricao = null;
-        dataValidade = null;
-        loja = null;
-        setor = null;
-        marca = null;
-        edicao = false;
+		LojaDto tDto = tController.pesquisarLoja();
+		if (tDto.isOk()) {
+			// Ok, recuperado
+			listaLoja = tDto.getLista();
+		} else {
+			// Colocando a mensagem do sistema
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, tDto.getMensagem(), tDto.getMensagem()));
+		}
 
-        return tela;
-    }
-	
-	// Métodos da Controller
-	public String cadastrar()
-	{
-	    System.out.println("ProdutoVB - Cadastrar : " + this);
+		MarcaController tController1 = new MarcaController();
 
-	    Produto tProduto = new Produto();
-	    tProduto.setNome(nome);
-	    tProduto.setDescricao(descricao);
-	    LocalDate tDataValidade = new java.sql.Date(dataValidade.getTime()).toLocalDate();
-	    tProduto.setDataValidade(tDataValidade);
-	    tProduto.setLoja(loja);
-	    tProduto.setSetor(setor);
-	    tProduto.setMarca(marca);
+		MarcaDto tDto1 = tController1.pesquisarMarca();
+		if (tDto1.isOk()) {
+			// Ok, recuperado
+			listaMarca = tDto1.getLista();
+		} else {
+			// Colocando a mensagem do sistema
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, tDto1.getMensagem(), tDto1.getMensagem()));
+		}
 
-	    ProdutoController tController = new ProdutoController();
+		SetorController tController11 = new SetorController();
 
-	    ProdutoDto tDto = tController.cadastrarProduto(tProduto);
-	    if (tDto.isOk())
-	    {
-	        // Ok, incluído
-	        id = tDto.getProduto().getId();
+		SetorDto tDto11 = tController11.pesquisarSetor();
+		if (tDto11.isOk()) {
+			// Ok, recuperado
+			listaSetor = tDto11.getLista();
+		} else {
+			// Colocando a mensagem do sistema
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, tDto11.getMensagem(), tDto11.getMensagem()));
+		}
 
-	        // Colocando a mensagem do sistema
-	        FacesContext.getCurrentInstance().addMessage(null,
-	                        new FacesMessage(FacesMessage.SEVERITY_INFO, tDto.getMensagem(), tDto.getMensagem()));
-	    }
-	    else
-	    {
-	        // Erro de inclusão
-
-	        // Colocando a mensagem do sistema
-	        FacesContext.getCurrentInstance().addMessage(null,
-	                        new FacesMessage(FacesMessage.SEVERITY_ERROR, tDto.getMensagem(), tDto.getMensagem()));
-	    }
-	    return null;
 	}
-	
-	   public String alterar()
-	    {
-	        System.out.println("ProdutoVB - Alterar : " + this);
 
-	        Produto tProduto = new Produto();
-	        tProduto.setId(id);
-	        tProduto.setNome(nome);
-	        tProduto.setDescricao(descricao);
-	        LocalDate tDataValidade = new java.sql.Date(dataValidade.getTime()).toLocalDate();
-	        tProduto.setDataValidade(tDataValidade);
-	        tProduto.setLoja(loja);
-	        tProduto.setSetor(setor);
-	        tProduto.setMarca(marca);
+	// Métodos da Controller
+	public String limpar() {
+		id = null;
+		nome = null;
+		descricao = null;
+		valorUnitario = null;
+		loja = null;
+		setor = null;
+		marca = null;
+		edicao = false;
 
-	        ProdutoController tController = new ProdutoController();
+		return tela;
+	}
 
-	        ProdutoDto tDto = tController.atualizarProduto(tProduto);
-	        if (tDto.isOk())
-	        {
-	            // Ok, alterado
-	            id = tDto.getProduto().getId();
+	// Métodos da Controller
+	public String cadastrar() {
+		System.out.println("ProdutoVB - Cadastrar : " + this);
 
-	            // Colocando a mensagem do sistema
-	            FacesContext.getCurrentInstance().addMessage(null,
-	                            new FacesMessage(FacesMessage.SEVERITY_INFO, tDto.getMensagem(), tDto.getMensagem()));
-	        }
-	        else
-	        {
-	            // Erro de alteração
+		Produto tProduto = new Produto();
+		tProduto.setNome(nome);
+		tProduto.setDescricao(descricao);
+		tProduto.setValorUnitario(valorUnitario);
+		tProduto.setLoja(loja);
+		tProduto.setSetor(setor);
+		tProduto.setMarca(marca);
 
-	            // Colocando a mensagem do sistema
-	            FacesContext.getCurrentInstance().addMessage(null,
-	                            new FacesMessage(FacesMessage.SEVERITY_ERROR, tDto.getMensagem(), tDto.getMensagem()));
-	        }
-	        return null;
-	    }
+		ProdutoController tController = new ProdutoController();
 
-	    public String consultar(Produto produto)
-	    {
-	        System.out.println("ProdutoVB - Consultar : " + this);
+		ProdutoDto tDto = tController.cadastrarProduto(tProduto);
+		if (tDto.isOk()) {
+			// Ok, incluído
+			id = tDto.getProduto().getId();
 
-	        ProdutoController tController = new ProdutoController();
+			// Colocando a mensagem do sistema
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, tDto.getMensagem(), tDto.getMensagem()));
+		} else {
+			// Erro de inclusão
 
-	        ProdutoDto tDto = tController.recuperarProduto(produto);
-	        if (tDto.isOk())
-	        {
-	            // Ok, recuperado
-	            Produto tProduto = tDto.getProduto();
-	            id = tProduto.getId();
-	            nome = tProduto.getNome();
-	            descricao = tProduto.getDescricao();
-	            dataValidade = java.sql.Date.valueOf(tProduto.getDataValidade());
-	            loja = tProduto.getLoja();
-	            marca = tProduto.getMarca();
-	            setor = tProduto.getSetor();
+			// Colocando a mensagem do sistema
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, tDto.getMensagem(), tDto.getMensagem()));
+		}
+		return null;
+	}
 
-	            // indicando que a pesquisa deu certo
-	            edicao = true;
-	            FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("PRODUTO", tProduto);
-	        }
-	        else
-	        {
-	            // Erro de consulta
-	            edicao = false;
+	public String alterar() {
+		System.out.println("ProdutoVB - Alterar : " + this);
 
-	            // Colocando a mensagem do sistema
-	            FacesContext.getCurrentInstance().addMessage(null,
-	                            new FacesMessage(FacesMessage.SEVERITY_ERROR, tDto.getMensagem(), tDto.getMensagem()));
-	        }
+		Produto tProduto = new Produto();
+		tProduto.setId(id);
+		tProduto.setNome(nome);
+		tProduto.setDescricao(descricao);
+		tProduto.setValorUnitario(valorUnitario);
+		tProduto.setLoja(loja);
+		tProduto.setSetor(setor);
+		tProduto.setMarca(marca);
 
-	        return tela;
-	    }
+		ProdutoController tController = new ProdutoController();
 
-	    public String excluir(Produto produto)
-	    {
-	        System.out.println("ProdutoVB - Excluir : " + this);
+		ProdutoDto tDto = tController.atualizarProduto(tProduto);
+		if (tDto.isOk()) {
+			// Ok, alterado
+			id = tDto.getProduto().getId();
 
-	        ProdutoController tController = new ProdutoController();
+			// Colocando a mensagem do sistema
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, tDto.getMensagem(), tDto.getMensagem()));
+		} else {
+			// Erro de alteração
 
-	        ProdutoDto tDto = tController.removeProduto(produto);
-	        if (tDto.isOk())
-	        {
-	            // Ok, exluido
-	            limpar();
+			// Colocando a mensagem do sistema
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, tDto.getMensagem(), tDto.getMensagem()));
+		}
+		return null;
+	}
 
-	            // indicando que a pesquisa deu certo
-	            edicao = false;
+	public String consultar(Produto produto) {
+		System.out.println("ProdutoVB - Consultar : " + this);
 
-	            // Colocando a mensagem do sistema
-	            FacesContext.getCurrentInstance().addMessage(null,
-	                            new FacesMessage(FacesMessage.SEVERITY_INFO, tDto.getMensagem(), tDto.getMensagem()));
+		ProdutoController tController = new ProdutoController();
 
-	        }
-	        else
-	        {
-	            // Erro de consulta
-	            edicao = false;
+		ProdutoDto tDto = tController.recuperarProduto(produto);
+		if (tDto.isOk()) {
+			// Ok, recuperado
+			Produto tProduto = tDto.getProduto();
+			id = tProduto.getId();
+			nome = tProduto.getNome();
+			descricao = tProduto.getDescricao();
+			valorUnitario = tProduto.getValorUnitario();
+			loja = tProduto.getLoja();
+			marca = tProduto.getMarca();
+			setor = tProduto.getSetor();
 
-	            // Colocando a mensagem do sistema
-	            FacesContext.getCurrentInstance().addMessage(null,
-	                            new FacesMessage(FacesMessage.SEVERITY_ERROR, tDto.getMensagem(), tDto.getMensagem()));
-	        }
+			// indicando que a pesquisa deu certo
+			edicao = true;
+			FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("PRODUTO", tProduto);
+		} else {
+			// Erro de consulta
+			edicao = false;
 
-	        return null;
-	    }
-	    
-	    public String pesquisar()
-	    {
-	        System.out.println("ProdutoVB - Pesquisar : " + this);
+			// Colocando a mensagem do sistema
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, tDto.getMensagem(), tDto.getMensagem()));
+		}
 
-	        ProdutoController tController = new ProdutoController();
+		return tela;
+	}
 
-	        ProdutoDto tDto = tController.pesquisarProdutosPorNome(nome);
-	        if (tDto.isOk())
-	        {
-	            // Ok, recuperado
-	            listaProduto = tDto.getLista();
-	        }
-	        else
-	        {
-	            // Colocando a mensagem do sistema
-	            FacesContext.getCurrentInstance().addMessage(null,
-	                            new FacesMessage(FacesMessage.SEVERITY_ERROR, tDto.getMensagem(), tDto.getMensagem()));
-	        }
+	public String excluir(Produto produto) {
+		System.out.println("ProdutoVB - Excluir : " + this);
 
-	        return null;
-	    }
+		ProdutoController tController = new ProdutoController();
+
+		ProdutoDto tDto = tController.removeProduto(produto);
+		if (tDto.isOk()) {
+			// Ok, exluido
+			limpar();
+
+			// indicando que a pesquisa deu certo
+			edicao = false;
+
+			// Colocando a mensagem do sistema
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, tDto.getMensagem(), tDto.getMensagem()));
+
+		} else {
+			// Erro de consulta
+			edicao = false;
+
+			// Colocando a mensagem do sistema
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, tDto.getMensagem(), tDto.getMensagem()));
+		}
+
+		return null;
+	}
+
+	public String pesquisar() {
+		System.out.println("ProdutoVB - Pesquisar : " + this);
+
+		ProdutoController tController = new ProdutoController();
+
+		ProdutoDto tDto = tController.pesquisarProdutosPorNome(nome);
+		if (tDto.isOk()) {
+			// Ok, recuperado
+			listaProduto = tDto.getLista();
+		} else {
+			// Colocando a mensagem do sistema
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, tDto.getMensagem(), tDto.getMensagem()));
+		}
+
+		return null;
+	}
 
 	// Métodos Gerais
 	@Override
-	public String toString()
-	{
-	    StringBuilder tBuilder = new StringBuilder();
-	    tBuilder.append(" [");
-	    tBuilder.append(id);
-	    tBuilder.append(", ");
-	    tBuilder.append(nome);
-	    tBuilder.append(", ");
-	    tBuilder.append(nomeLoja);
-        tBuilder.append(", ");
-	    tBuilder.append(descricao);
-	    tBuilder.append(", ");
-	    tBuilder.append(dataValidade);
-	    tBuilder.append(", ");
-	    tBuilder.append(loja);
-	    tBuilder.append(", ");
-	    tBuilder.append(setor);
-	    tBuilder.append(", ");
-	    tBuilder.append(marca);
-	    tBuilder.append("]");
-	    return tBuilder.toString();
+	public String toString() {
+		StringBuilder tBuilder = new StringBuilder();
+		tBuilder.append(" [");
+		tBuilder.append(id);
+		tBuilder.append(", ");
+		tBuilder.append(nome);
+		tBuilder.append(", ");
+		tBuilder.append(nomeLoja);
+		tBuilder.append(", ");
+		tBuilder.append(descricao);
+		tBuilder.append(", ");
+		tBuilder.append(valorUnitario);
+		tBuilder.append(loja);
+		tBuilder.append(", ");
+		tBuilder.append(setor);
+		tBuilder.append(", ");
+		tBuilder.append(marca);
+		tBuilder.append("]");
+		return tBuilder.toString();
 	}
-	}
+}

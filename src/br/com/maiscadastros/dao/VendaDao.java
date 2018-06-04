@@ -32,9 +32,9 @@ public class VendaDao
 		return 	 (Venda) this.session.get(Venda.class, venda.getId());
 	}
 
-	public Venda recoveryByNotaFiscal(long notaFiscal) {
+	public Venda recoveryById(Integer id) {
 
-		Venda venda = (Venda) this.session.get(Venda.class, notaFiscal);
+		Venda venda = (Venda) this.session.get(Venda.class, id);
 
 		return venda;
 
