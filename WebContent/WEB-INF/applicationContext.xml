@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 	<bean id="cadastroDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName">
-			<value>java:jboss/datasources/AlunoOracleDS</value>
+			<value>java:jboss/datasources/OracleDSALUNO</value>
 		</property>
 	</bean>
 </beans>
